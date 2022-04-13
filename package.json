@@ -19,10 +19,16 @@
   },
   "homepage": "https://github.com/LuckyLiu123/webpack-test#readme",
   "devDependencies": {
+    "autoprefixer": "^10.4.4",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^4.3.0",
+    "cssnano": "^5.1.7",
     "html-webpack-plugin": "^4.5.2",
+    "less": "^4.1.2",
+    "less-loader": "^7.3.0",
     "mini-css-extract-plugin": "^1.6.2",
+    "postcss": "^8.4.12",
+    "postcss-loader": "^4.3.0",
     "style-loader": "^2.0.0",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12"

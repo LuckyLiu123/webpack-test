@@ -21,12 +21,41 @@ module.exports = {
         filename: '[name].js',   //生成的资源叫什么  占位符[name]
     },
     mode: 'development',   //none production development
+    resolveLoader: {
+        modules: ['./node_modules', './myLoaders']
+    },
     module: {
         rules: [
             {
                 test: /\.css$/,
                 // use: ["style-loader", "css-loader"],  //执行顺序 自后往前
                 use: [MiniCssExtractPlugin.loader, "css-loader"],
+            },
+            // {
+            //     test: /\.less$/,
+            //     use: [
+            //         MiniCssExtractPlugin.loader, 
+            //         "css-loader", 
+            //         "postcss-loader", 
+            //         "less-loader"
+            //     ]
+            // },
+            {
+                test: /\.less$/,
+                use: ['kkb-style-loader', 'kkb-css-loader', 'kkb-less-loader'],
+            },
+            {
+                test: /\.js$/,
+                // use: resolve(__dirname, './MyLoaders/mini-loader.js')
+                use: [
+                    {
+                        // loader: resolve(__dirname, './MyLoaders/mini-loader.js'),
+                        loader: 'mini-loader',  //配置resolveLoader之后
+                        options: {
+                            name: 'heihei'
+                        }
+                    }
+                ]
             }
         ]
     },
