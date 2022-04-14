@@ -1,23 +1,36 @@
-
-//webpack的配置文件
-
-//webpack是基于nodejs的
-const { resolve } = require('path')
+const { resolve, join } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const glob = require('glob')
+
+//多页面
+const setMPA = () => {
+    const entry = {};
+    const htmlWebpackPlugins = [];
+
+    //查询页面入口模块 路径 以及相应的html模块
+
+    //提取页面入口的名称，用于entry的chunkName
+
+    //一个约定：所有页面入口模块和相应的html模块都要放在一个目录下，页面的名称就是目录的名称
+    const entryPath = glob.sync(join(__dirname, './src/*/index.js'));
+
+    console.log(entryPath);
+
+    return {
+        entry,
+        htmlWebpackPlugins
+    }
+}
+
+const { entry, htmlWebpackPlugins } = setMPA();
 
 module.exports = {
-    //入口
-    // spa 单页面应用
-    // mpa 多页面应用 多入口 对应 多出口
-    entry: {      //入口文件既支持相对路径也支持绝对路径
-        index: './src/index.js',
-        login: './src/login.js'
-    },
+    entry,
     //出口
     output: {
-        path: resolve(__dirname, './build'),  //生成资源的存放位置，必须是绝对路径
+        path: resolve(__dirname, './mpa'),  //生成资源的存放位置，必须是绝对路径
         filename: '[name].js',   //生成的资源叫什么  占位符[name]
     },
     mode: 'development',   //none production development
@@ -61,18 +74,9 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: './src/public/index.html',
-            filename: 'index.html',
-            chunks: ['index'],   // 多页面打包的时候 chunks做资源的区分
-        }),
         new MiniCssExtractPlugin({
             filename: 'index.css'
         }),
-        new HtmlWebpackPlugin({
-            template: './src/public/login.html',
-            filename: 'login.html',
-            chunks: ['login']
-        }),
+        ...htmlWebpackPlugins,
     ]
 }

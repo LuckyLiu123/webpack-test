@@ -40,8 +40,8 @@ chunkNames 有效的名称
 一个 loader 只做一件事情
 当多个 loader 作用于同一个模块的时候，它的执行顺序是：自后往前
 
-
-
+## 多页面打包通用解决方案 ##
+mpa.config.js
 
 
 
