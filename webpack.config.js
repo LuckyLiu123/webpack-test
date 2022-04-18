@@ -6,6 +6,7 @@ const { resolve } = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const myPlugins = require('./myPlugins/txt-webpack-plugin.js')
 
 module.exports = {
     //入口
@@ -74,5 +75,8 @@ module.exports = {
             filename: 'login.html',
             chunks: ['login']
         }),
+        new myPlugins({
+            name: 'kkb'
+        })
     ]
 }
